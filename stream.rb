@@ -14,7 +14,6 @@ def get_twitter_stream c, q
             # 削除通知など、'text'パラメータを含まないものは無視して次へ
             next unless status['text']
             user = status['user']
-            puts "#{user['screen_name']}: #{status['text']}"
             q.push status
           end
         end
@@ -38,7 +37,7 @@ def post_twitter q, c
     access_token = OAuth::AccessToken.new(
       consumer,
       c["oauth_key"],
-      c["aouth_secret"]
+      c["oauth_secret"]
     )
     access_token.post 'http://twitter.com/statuses/update.json', "status" => q
   rescue => e
